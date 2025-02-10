@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    input {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background: #28a745;
+      color: white;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    .mydiv {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    p {
+      background: #d1ecf1;
+      color: #0c5460;
+      padding: 8px;
+      border-radius: 5px;
+      margin: 5px 0;
+    }
+    h6{
+      margin: 10px;
+      color: #0c5460;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Chat Filter</h2>
+    <h6>This chat filter, filter out input containing the word f**k</h6>
+    <input type="text" class="userinput" placeholder="Type a message...">
+    <button onclick="submit()">Submit</button>
+    <div class="mydiv"></div>
+  </div>
+
+  <script>
+    const userinput = document.querySelector(".userinput"); // target input element
+    let userinputarray = []; // create array for storing uservalue
+    const divelement = document.querySelector(".mydiv"); // target div element
+
+    function replaceRestrictedWord(){  //function for replacing restricted word
+      for(var i= 0; i < userinputarray.length; i++){
+      if(userinputarray[i].indexOf("fuck") !== -1){ // checks if the array contains the word fuck
+        userinputarray[i] = "Hey,be polite!";
+      }
+      else if(userinputarray[i].indexOf("Fuck") !== -1){ // checks if the array contains the word Fuck
+        userinputarray[i] = "Hey,be polite!";
+      }
+      else if(userinputarray[i].indexOf("FUCK") !== -1){ // checks if the array contains the word FUCK
+        userinputarray[i] = "Hey,be polite!";
+      }
+    }
+  }
+
+
+    function submit(){
+      let uservalue = userinput.value; // get user input value
+      if (uservalue === "" || uservalue === " "){ // do nothing if uservalue is blank
+      } else{userinputarray.push(uservalue);}
+      // pushing value to array
+      userinput.value = ""; // clearing input field
+      replaceRestrictedWord();
+      divelement.innerHTML = ""; // clearing innerHTML of div to avoid duplication
+      loopinghtml();
+    }
+
+    function loopinghtml(){
+      for(let i = 0; i < userinputarray.length; i++){
+          divelement.innerHTML += `<p>${userinputarray[i]}</p>`
+      }
+      
+
+    }
+  </script>
+</body>
+</html>
